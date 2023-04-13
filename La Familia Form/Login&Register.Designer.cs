@@ -55,7 +55,7 @@
             // 
             // button_GoToLogin
             // 
-            this.button_GoToLogin.BackColor = System.Drawing.Color.DimGray;
+            this.button_GoToLogin.BackColor = System.Drawing.Color.DarkGray;
             this.button_GoToLogin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button_GoToLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_GoToLogin.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -70,7 +70,7 @@
             // 
             // button_GoToRegister
             // 
-            this.button_GoToRegister.BackColor = System.Drawing.Color.DimGray;
+            this.button_GoToRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button_GoToRegister.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button_GoToRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_GoToRegister.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -287,10 +287,11 @@
             this.ClientSize = new System.Drawing.Size(555, 562);
             this.Controls.Add(this.button_GoToRegister);
             this.Controls.Add(this.button_GoToLogin);
-            this.Controls.Add(this.register_panel);
             this.Controls.Add(this.login_panel);
+            this.Controls.Add(this.register_panel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.login_panel.ResumeLayout(false);
