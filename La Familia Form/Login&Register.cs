@@ -41,7 +41,24 @@ namespace La_Familia_Form
 
         private void login_button_Click(object sender, EventArgs e)
         {
+            string username = login_username.Text;
+            byte[] passwordHash = System.Security.Cryptography.SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(login_password.Text));
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [register] WHERE username=@Username AND password=@Password", conn);
+            cmd.Parameters.AddWithValue("@Username", username);
+            cmd.Parameters.AddWithValue("@Password", passwordHash);
+            conn.Open();
+            int count = (int)cmd.ExecuteScalar();
+            conn.Close();
 
+            if (count > 0)
+            {
+                MessageBox.Show("Login successful!");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password!");
+            }
         }
 
         private void button_register_Click(object sender, EventArgs e)
@@ -51,7 +68,7 @@ namespace La_Familia_Form
                 MessageBox.Show("Isi dulu kocak!");
                 return;
             }
-            byte[] passwordHash = System.Security.Cryptography.SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(register_password.Text));
+            byte[] passwordHash = System.Security.Cryptography.SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(register_password.Text));
             
             if (register_password.Text != confirm_password.Text)
             {
@@ -64,14 +81,20 @@ namespace La_Familia_Form
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "INSERT INTO [register] (first_name, last_name, password) values (@First_name, @Last_name, @Password)";
+                cmd.CommandText = "INSERT INTO [register] (first_name, last_name, username, password) values (@First_name, @Last_name, @Username, @Password)";
                 cmd.Parameters.AddWithValue("@First_name", first_name.Text);
                 cmd.Parameters.AddWithValue("@Last_name", last_name.Text);
+                cmd.Parameters.AddWithValue("@Username", register_username.Text);
                 cmd.Parameters.AddWithValue("@Password", passwordHash);
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
                 MessageBox.Show("Success!");
+                first_name.Text = "";
+                last_name.Text = "";
+                register_username.Text = "";
+                register_password.Text = "";
+                confirm_password.Text = "";
             }
         }
     }
