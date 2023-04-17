@@ -53,7 +53,8 @@ namespace La_Familia_Form
             if (count > 0)
             {
                 MessageBox.Show("Login successful!");
-                this.Close();
+                login_username.Text = "";
+                login_password.Text = "";
             }
             else
             {
